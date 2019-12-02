@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from 'react-native';
+import t from 'tcomb-form-native';
+
 
 /* this is the stuff from the rapidAPI documentation on how to create an example request.
 
@@ -25,34 +27,50 @@ req.end(function (res) {
 });
 */
 
+const Form = t.form.Form;
+
+/*const Ingredient = t.struct({
+  name: t.String
+});
+*/
+
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {text: ''};
+
   }
+
   static navigationOptions = {
     title: 'Search',
   };
+
+  _onPressButton() {
+    alert('you added ' + this.state.text + "!")
+  }
+
+  submitAndClear = () => {}
 
   render() {
     return (
       <View style={styles.container}>
       <Text>Add your ingredients here:</Text>
       <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{height: 40, width: 250, borderColor: 'gray', borderWidth: 1}}
           placeholder="Enter ingredient here!"
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
+          clearButtonMode='always'
         />
-        <Button
-          title = "Add"
-          //onPress = {() => navigate('Search')}
-          />
+        <TouchableHighlight onPress={this._onPressButton.bind(this)} underlayColor="blue">
+          <View style={styles.button}>
+              <Text style={styles.buttonText}>SUBMIT</Text>
+          </View>
+        </TouchableHighlight>
       </View>
     );
   }
 }
-
 
   const styles = StyleSheet.create({
     container: {
