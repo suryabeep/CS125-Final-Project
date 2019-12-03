@@ -26,6 +26,13 @@ req.end(function (res) {
 });
 */
 
+const Form = t.form.Form;
+
+/*const Ingredient = t.struct({
+  name: t.String
+});
+*/
+
 export default class Search extends React.Component {
   state = {
     storedText: "",
