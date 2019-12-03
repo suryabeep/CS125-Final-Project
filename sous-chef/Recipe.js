@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, WebView } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import {WebView} from 'react-native-webview'
+
+const {height, width} = Dimensions.get('window')
 
 export default class Search extends React.Component {
   static navigationOptions = {
@@ -9,11 +12,7 @@ export default class Search extends React.Component {
     const link = this.props.navigation.state.params.link
     return (
       <View style={styles.container}>
-        <Text> The link for this recipe is: {link}</Text>
-        <View style={styles.container}>
-          <WebView source={{uri: link}}/>
-        </View>
-        
+        <WebView source={{uri: link}} style={styles.webview}/> 
       </View>
     );
   }
@@ -26,4 +25,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  webview: {
+    flex: 1,
+    width: width,
+  }
 });
