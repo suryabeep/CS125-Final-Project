@@ -69,6 +69,7 @@ export default class Home extends React.Component {
               ))}
             </ScrollView>
           </View>
+          <View style={{width: '100%', height: '10%'}}/>
         </View>
       </View>
     );
