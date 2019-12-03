@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Alert 
 import {Ionicons} from '@expo/vector-icons'
 
 /* this is the stuff from the rapidAPI documentation on how to create an example request.
-
-
 var unirest = require("unirest");
 
 var req = unirest("GET", "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer");
@@ -18,18 +16,10 @@ req.headers({
 	"x-rapidapi-key": "SIGN-UP-FOR-KEY"
 });
 
-
 req.end(function (res) {
 	if (res.error) throw new Error(res.error);
 
 	console.log(res.body);
-});
-*/
-
-const Form = t.form.Form;
-
-/*const Ingredient = t.struct({
-  name: t.String
 });
 */
 
