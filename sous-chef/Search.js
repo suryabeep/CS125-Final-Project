@@ -26,9 +26,9 @@ req.end(function (res) {
 export default class Search extends React.Component {
   state = {
     storedText: "",
-    ingredients: ['Bread', 'Sugar'],
+    ingredients: [],
   }
-  
+
   static navigationOptions = {
     title: 'Search',
   };
@@ -52,13 +52,62 @@ export default class Search extends React.Component {
   submitSearch = () => {
     let ingredients = JSON.stringify(this.state.ingredients)
     Alert.alert("Submitted search request for: " + ingredients)
+    //console.log("ing:" + ingredients);
+    var results = ingredients.split("\"");
+    /*for (var i = 0; i < results.length; i++) {
+      console.log(results[i]);
+    }*/
+    var fetchBeg = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=1&ranking=1&ignorePantry=false&ingredients=";
+    var temp = "";
+    for (var i = 0; i < results.length; i++) {
+      //console.log("inside the 2nd for");
+      //console.log(ingredients.getIndexOf(i));
+      if (temp != "" && (results[i] != "[" && results[i] != "]" && results[i] != ","
+                      && results[i] != " ")) {
+        temp += "2C";
+      }
+
+      //console.log(ingredients[i]);
+
+      /*
+      !results[i].equals("[") && !results[i].equals("]") && !results[i].equals(",")
+                      && !results[i].equals(" ")
+      */
+
+      if (results[i] != "[" && results[i] != "]" && results[i] != ","
+                      && results[i] != " ") {
+        temp += results[i];
+      }
+
+      if (i != (results.length - 2) && (results[i] != "[" && results[i] != "]" && results[i] != ","
+                      && results[i] != " ")) {
+        temp += "%";
+      }
+
+      //console.log("temp: " + temp);
+    }
+
+    //console.log("everything: " + fetchBeg + temp);
+    fetch(fetchBeg + temp, {
+    	"method": "GET",
+    	"headers": {
+    		"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+    		"x-rapidapi-key": "e90184137dmsh5ff463f6fb5212bp1cba50jsne9d67166897a"
+    }
+  })
+  .then(response => {
+  	console.log(response);
+  })
+  .catch(err => {
+  	console.log(err);
+  });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <TextInput 
+          <TextInput
             style={styles.inputText}
             onChangeText={this.onChangeText}
             onSubmitEditing={this.onSubmitEditing}
@@ -122,8 +171,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   midContainer: {
-    flex: 1, 
-    width: '100%', 
+    flex: 1,
+    width: '100%',
     justifyContent: 'space-around',
   },
   bottomContainer: {
