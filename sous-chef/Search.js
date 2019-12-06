@@ -96,7 +96,7 @@ export default class Search extends React.Component {
     }
   })
   .then(response => {
-  	console.log(response);
+    this.props.navigation.navigate('Results', {results: response})
   })
   .catch(err => {
   	console.log(err);
