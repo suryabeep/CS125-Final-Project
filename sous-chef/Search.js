@@ -26,7 +26,7 @@ req.end(function (res) {
 export default class Search extends React.Component {
   state = {
     storedText: "",
-    ingredients: [],
+    ingredients: ['bread','sugar'],
   }
 
   static navigationOptions = {
@@ -95,13 +95,17 @@ export default class Search extends React.Component {
     		"x-rapidapi-key": "e90184137dmsh5ff463f6fb5212bp1cba50jsne9d67166897a"
     }
   })
-  .then(response => {
-    this.props.navigation.navigate('Results', {results: response})
-  })
+  .then(response => response.json())
+  .then(responseJson => console.log(responseJson));
+    //console.log(response);
+    //this.props.navigation.navigate('Results', {results: response})
+  }
+  /*
   .catch(err => {
   	console.log(err);
   });
-  }
+  */
+  //}
 
   render() {
     return (
