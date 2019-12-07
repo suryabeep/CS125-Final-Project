@@ -9,7 +9,44 @@ export default class Home extends React.Component {
   };
 
   state = {
-    
+    titles: [],
+    ids: [],
+    imageURLs: [],
+  }
+
+  componentDidMount = () => {
+    //processing the results
+    try {
+      let results = this.props.navigation.state.params.results
+      let titles = [... this.state.titles]
+      let ids = [... this.state.ids]
+      let imageURLs = [... this.state.imageURLs]
+      for (let i = 0; i < results.length; i++) {
+        const title = results[i].title
+        const id = results[i].id
+        const imageURL = results[i].image
+        titles.push(title)
+        ids.push(id)
+        imageURLs.push(imageURL)
+      }
+      titles.push(results[0].title)
+      this.setState({titles, ids, imageURLs});
+      console.log(JSON.stringify(titles));
+      console.log(JSON.stringify(ids));
+      console.log(JSON.stringify(imageURLs));
+    } catch (error) {
+      console.log(error.message)
+      console.log("error in results.js")
+    }
+  }
+
+  componentWillUnmount = () => {
+    //clear all state from this page since it will change at the next search
+    this.setState({
+      titles: [],
+      ids: [],
+      images: [],
+    })
   }
 
   openRecipe = (obj) => {
@@ -18,7 +55,7 @@ export default class Home extends React.Component {
 
   render() {
     const {navigate} = this.props.navigation;
-    const results = this.props.navigation.state.params.results
+    let results = this.props.navigation.state.params.results
     return (
       <View style={styles.container}>
         <Text> Results page </Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Alert, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, Alert, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import {WebView} from 'react-native-webview'
 
 const {height, width} = Dimensions.get('window')
@@ -9,7 +9,7 @@ export default class Search extends React.Component {
   };
 
   state = {
-    favPressed: false
+    favPressed: false,
   }
 
   pressFav = () => {
@@ -17,11 +17,15 @@ export default class Search extends React.Component {
     this.setState({favPressed: !this.state.favPressed})
   }
 
+  //when a recipe mounts, have to get the current list of recents
+  //then when the recipe unmounts, have to pop the least recent from the array
+  // and add the recipe to the front of the least recent array
+
   render() {
-    const link = this.props.navigation.state.params.link
+    const recipe = this.props.navigation.state.params.recipe
     return (
       <View style={styles.container}>
-        <WebView source={{uri: link}} style={styles.webview}/> 
+        <WebView source={{uri: recipe.link}} style={styles.webview}/> 
         <TouchableOpacity 
           style={this.state.favPressed
                   ? styles.fabContainer 
@@ -34,12 +38,6 @@ export default class Search extends React.Component {
   }
 }
 
-
-/*<FloatingAction
-          onPressMain={this.pressFav}
-          color="rgb(252, 44, 3)"
-          icon = {require("./assets/heart.png")}
-        /> */
 const styles = StyleSheet.create({
   container: {
     flex: 1,

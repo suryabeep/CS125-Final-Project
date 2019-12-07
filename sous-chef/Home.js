@@ -25,7 +25,7 @@ export default class Home extends React.Component {
   }
 
   openRecipe = (obj) => {
-    this.props.navigation.navigate('Recipe', {link: obj.link})
+    this.props.navigation.navigate('Recipe', {recipe: obj})
   }
 
   render() {
