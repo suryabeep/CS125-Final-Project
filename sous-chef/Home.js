@@ -15,17 +15,17 @@ export default class Home extends React.Component {
     recent: [
       {link: "https://cafedelites.com/kung-pao-chicken/", image: require('./assets/asset1.png')},
       {link: "https://www.feastingathome.com/lamb-kebabs-with-herb-salad-and-yogurt-sauce/", image: require('./assets/asset2.png')},
-      {link: "", image: require('./assets/asset3.png')},
+      {link: "https://www.food.com/recipe/dal-nirvana-naan-493936#activity-feed", image: require('./assets/asset3.png')},
     ],
     favorites: [
       {link: "https://thekitchenpaper.com/indian-butter-chicken/", image: require('./assets/asset4.png')},
-      {link: "", image: require('./assets/asset5.png')},
-      {link: "", image: require('./assets/asset6.png')},
+      {link: "https://www.foodnetwork.com/recipes/tyler-florence/spicy-grilled-salmon-with-mango-radish-and-lime-salsa-recipe-1953645", image: require('./assets/asset5.png')},
+      {link: "https://www.williams-sonoma.com/recipe/pappardelle-with-bolognese-sauce.html", image: require('./assets/asset6.png')},
     ],
   }
 
   openRecipe = (obj) => {
-    this.props.navigation.navigate('Recipe', {recipe: obj})
+    this.props.navigation.navigate('Recipe', {link: obj.link})
   }
 
   render() {

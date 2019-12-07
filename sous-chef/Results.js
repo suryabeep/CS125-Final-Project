@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, Image, Alert, Dimensions } from 'react-native';
 
+const {height, width} = Dimensions.get('window')
 const imageWidth = 200
 
 export default class Home extends React.Component {
@@ -9,31 +10,26 @@ export default class Home extends React.Component {
   };
 
   state = {
-    titles: [],
-    ids: [],
-    imageURLs: [],
+    recipes: [],
   }
 
   componentDidMount = () => {
     //processing the results
     try {
       let results = this.props.navigation.state.params.results
-      let titles = [... this.state.titles]
-      let ids = [... this.state.ids]
-      let imageURLs = [... this.state.imageURLs]
+      let recipes = [... this.state.recipes];
       for (let i = 0; i < results.length; i++) {
         const title = results[i].title
         const id = results[i].id
         const imageURL = results[i].image
-        titles.push(title)
-        ids.push(id)
-        imageURLs.push(imageURL)
+        recipes.push({
+          title: title,
+          id: id,
+          imageURL: imageURL
+        })
       }
-      titles.push(results[0].title)
-      this.setState({titles, ids, imageURLs});
-      console.log(JSON.stringify(titles));
-      console.log(JSON.stringify(ids));
-      console.log(JSON.stringify(imageURLs));
+      this.setState({recipes});
+      console.log(JSON.stringify(recipes));
     } catch (error) {
       console.log(error.message)
       console.log("error in results.js")
@@ -49,8 +45,11 @@ export default class Home extends React.Component {
     })
   }
 
-  openRecipe = (obj) => {
-    this.props.navigation.navigate('Recipe', {link: obj.link})
+  openRecipe = (id) => {
+    console.log('id pressed is: ' + id)
+    //this is where we'd have to make the second JSON request to get the link to the webpage
+    //once we get the link, we have to pass it to the navigation prop below
+    //  this.props.navigation.navigate('Recipe', {link: LINK_HERE})
   }
 
   render() {
@@ -58,9 +57,13 @@ export default class Home extends React.Component {
     let results = this.props.navigation.state.params.results
     return (
       <View style={styles.container}>
-        <Text> Results page </Text>
-        <ScrollView>
-          <Text> {JSON.stringify(results)} </Text>
+        <ScrollView contentContainerStyle={styles.scroller}>
+          {this.state.recipes.map((recipe, index) => (
+            <TouchableOpacity style={styles.card} key={index} onPress={() => this.openRecipe(recipe.id)}>
+              <Image source={{uri: recipe.imageURL}} style={{width: 130, height: 130, paddingLeft: 10, paddingVertical: 10}}/>
+              <Text style={styles.recipeTitle}> {recipe.title} </Text>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       </View>
     );
@@ -74,24 +77,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  div: {
+  scroller: {
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-  },
-  newSearch: {
-    backgroundColor: 'rgb(3, 169, 252)',
-    borderColor: 'black',
-    borderRadius: 30,
-    width: '80%',
-    height: 50,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    margin: 20
+    justifyContent: 'flex-start',
+    width: width
   },
-  header: {
-    fontFamily: 'HelveticaNeue-Light',
-    fontSize: 40,
-    padding: 10,
+  card: {
+    backgroundColor: 'rgb(240,240,240)',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: width * 0.9,
+    height: 150,
+    marginTop: 10,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 10,
+  },
+  recipeTitle: {
+    fontFamily: 'Helvetica Neue',
+    fontSize: 30,
+    padding: 3,
+    flex: 1,
+    flexWrap: 'wrap'
   }
 });

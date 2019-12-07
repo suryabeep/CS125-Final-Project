@@ -22,10 +22,10 @@ export default class Search extends React.Component {
   // and add the recipe to the front of the least recent array
 
   render() {
-    const recipe = this.props.navigation.state.params.recipe
+    const link = this.props.navigation.state.params.link
     return (
       <View style={styles.container}>
-        <WebView source={{uri: recipe.link}} style={styles.webview}/> 
+        <WebView source={{uri: link}} style={styles.webview}/> 
         <TouchableOpacity 
           style={this.state.favPressed
                   ? styles.fabContainer 

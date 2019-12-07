@@ -51,7 +51,6 @@ export default class Search extends React.Component {
 
   submitSearch = () => {
     let ingredients = JSON.stringify(this.state.ingredients)
-    Alert.alert("Submitted search request for: " + ingredients)
     //console.log("ing:" + ingredients);
     var results = ingredients.split("\"");
     /*for (var i = 0; i < results.length; i++) {
