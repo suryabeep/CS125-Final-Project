@@ -47,6 +47,20 @@ export default class Home extends React.Component {
 
   openRecipe = (id) => {
     console.log('id pressed is: ' + id)
+
+    fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + id + "/information", {
+    	"method": "GET",
+    	"headers": {
+    		"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+    		"x-rapidapi-key": "e90184137dmsh5ff463f6fb5212bp1cba50jsne9d67166897a"
+    	}
+    })
+    .then(response => response.json().then(data => {
+      console.log(data["sourceUrl"]);
+      //ar link = data.sourceUrl;
+      //console.log("link:" + sourceUrl)
+      this.props.navigation.navigate('Recipe', {link: data["sourceUrl"]})
+    }))
     //this is where we'd have to make the second JSON request to get the link to the webpage
     //once we get the link, we have to pass it to the navigation prop below
     //  this.props.navigation.navigate('Recipe', {link: LINK_HERE})
