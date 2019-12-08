@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, Image, Alert, Dimensions } from 'react-native';
+import { AppLoading, Font, Asset, Icon } from 'expo';
 
 const {height, width} = Dimensions.get('window')
 const imageWidth = 200
@@ -111,7 +112,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   recipeTitle: {
-    fontFamily: 'Helvetica Neue',
     fontSize: 30,
     padding: 3,
     flex: 1,

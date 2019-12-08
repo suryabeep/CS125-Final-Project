@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   };
 
   state = {
-    //the recent and favorites array are currently for testing only. 
+    //the recent and favorites array are currently for testing only.
     //when we implement the WebAPI integration, we will have to populate the link and path in this Home
     // component's onComponentDidMount
     recent: [
@@ -34,16 +34,16 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style = {styles.newSearch} onPress = {() => navigate('Search')}>
-          <Text style={{fontFamily: 'Helvetica Neue', fontSize: 24, color: 'white'}}>
+          <Text style={{fontSize: 24, color: 'white'}}>
             Create new search
           </Text>
         </TouchableOpacity>
         <View style={[styles.container, {alignItems:'flex-start'}]}>
           <View style={{width:'100%', height: '25%', justifyContent: 'center', alignItems: 'center'}}>
-            <ImageBackground source={require('./assets/burger.png')} 
+            <ImageBackground source={require('./assets/burger.png')}
               style={{width:'100%', height:'100%', justifyContent: 'center', alignContent: 'center'}}>
-                <View style={{justifyContent: 'center', alignContent: 'center', borderColor:'white', borderWidth:'2'}}>
-                  <Text style={{fontFamily: 'HelveticaNeue-Bold', fontSize: 48, color: 'white'}}>
+                <View style={{justifyContent: 'center', alignContent: 'center', borderColor:'white', borderWidth:2}}>
+                  <Text style={{fontSize: 48, color: 'white'}}>
                     Sous Chef
                   </Text>
                 </View>
@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     margin: 20
   },
   header: {
-    fontFamily: 'HelveticaNeue-Light',
     fontSize: 40,
     padding: 10,
   }

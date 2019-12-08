@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import {Ionicons} from '@expo/vector-icons'
+//import * as Font from 'expo-font';
+import { AppLoading, Font, Asset, Icon } from 'expo';
 
 /* this is the stuff from the rapidAPI documentation on how to create an example request.
 var unirest = require("unirest");
@@ -118,8 +120,8 @@ export default class Search extends React.Component {
           />
         </View>
         <View style={styles.midContainer}>
-          <Text style={{fontSize: 30, fontFamily: 'HelveticaNeue', padding: 3,}}> Current Ingredients </Text>
-          <View style={{borderBottomColor: 'black', borderBottomWidth: '2', width: '100%', marginHorizontal: 10}}/>
+          <Text style={{fontSize: 30, padding: 3,}}> Current Ingredients </Text>
+          <View style={{borderBottomColor: 'black', borderBottomWidth:2, width: '100%', marginHorizontal: 10}}/>
         </View>
         <View style={styles.ingredientsList}>
           <ScrollView contentContainerStyle={styles.ingredientsList}>
@@ -182,7 +184,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputText: {
-    fontFamily: 'Helvetica Neue',
     fontSize: 18,
     color: 'black',
     padding: 2,
@@ -196,7 +197,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(3, 169, 252)',
   },
   submitText: {
-    fontFamily: "Helvetica Neue",
     fontSize: 30,
     color: 'white',
     padding: 20,
@@ -211,6 +211,5 @@ const styles = StyleSheet.create({
   },
   ingredientText:  {
     fontSize: 24,
-    fontFamily: 'Helvetica Neue'
   }
 });

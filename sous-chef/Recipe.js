@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Dimensions, Alert, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import {WebView} from 'react-native-webview'
+import { AppLoading, Font, Asset, Icon } from 'expo';
 
 const {height, width} = Dimensions.get('window')
 export default class Search extends React.Component {
@@ -25,11 +26,11 @@ export default class Search extends React.Component {
     const link = this.props.navigation.state.params.link
     return (
       <View style={styles.container}>
-        <WebView source={{uri: link}} style={styles.webview}/> 
-        <TouchableOpacity 
+        <WebView source={{uri: link}} style={styles.webview}/>
+        <TouchableOpacity
           style={this.state.favPressed
-                  ? styles.fabContainer 
-                  : [styles.fabContainer, {backgroundColor: 'white'}]} 
+                  ? styles.fabContainer
+                  : [styles.fabContainer, {backgroundColor: 'white'}]}
           onPress={this.pressFav}>
           <Image source={require('./assets/heart.png')} style={styles.floatingButton}/>
         </TouchableOpacity>
@@ -65,5 +66,5 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 25,
     backgroundColor: 'red',
-  }, 
+  },
 });
