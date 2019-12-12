@@ -14,7 +14,6 @@ export default class Search extends React.Component {
   }
 
   pressFav = () => {
-    Alert.alert('Pressed fav');
     this.setState({favPressed: !this.state.favPressed})
   }
 
